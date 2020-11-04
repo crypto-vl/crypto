@@ -2,15 +2,15 @@ from lib import *
 
 
 def enc2(m, k0, k1, k2):
-    m_vec = ensure_vec(m)
-    k0_vec = ensure_vec(k0)
-    k1_vec = ensure_vec(k1)
-    k2_vec = ensure_vec(k2)
-    u = m_vec + k0_vec
+    m = ensure_vec(m)
+    k0 = ensure_vec(k0)
+    k1 = ensure_vec(k1)
+    k2 = ensure_vec(k2)
+    u = m + k0
     v = S(u)
-    w = v + k1_vec
+    w = v + k1
     x = S(w)
-    c = x + k2_vec
+    c = x + k2
     return u, v, w, x, c
 
 
