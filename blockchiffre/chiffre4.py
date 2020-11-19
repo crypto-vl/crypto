@@ -1,32 +1,37 @@
-load("lib.sage")
+load("lib.py")
 
 import random
 
 def bperm(t1,t2,t3,t4):
+    t1 = ensure_vec(t1)
+    t2 = ensure_vec(t2)
+    t3 = ensure_vec(t3)
+    t4 = ensure_vec(t4)
+
     r1 = B([0,0,0,0])
     r2 = B([0,0,0,0])
     r3 = B([0,0,0,0])
     r4 = B([0,0,0,0])
 
-    r4[3] = t1[0]
-    r4[2] = t2[0]
-    r4[1] = t3[0]
-    r4[0] = t4[0]
+    r1[0] = t1[0]
+    r1[1] = t2[0]
+    r1[2] = t3[0]
+    r1[3] = t4[0]
 
-    r3[3] = t1[1]
-    r3[2] = t2[1]
-    r3[1] = t3[1]
-    r3[0] = t4[1]
+    r2[0] = t1[1]
+    r2[1] = t2[1]
+    r2[2] = t3[1]
+    r2[3] = t4[1]
 
-    r2[3] = t1[2]
-    r2[2] = t2[2]
-    r2[1] = t3[2]
-    r2[0] = t4[2]
+    r3[0] = t1[2]
+    r3[1] = t2[2]
+    r3[2] = t3[2]
+    r3[3] = t4[2]
 
-    r1[3] = t1[3]
-    r1[2] = t2[3]
-    r1[1] = t3[3]
-    r1[0] = t4[3]
+    r4[0] = t1[3]
+    r4[1] = t2[3]
+    r4[2] = t3[3]
+    r4[3] = t4[3]
 
     return r1, r2, r3, r4
 
@@ -135,3 +140,14 @@ def attackCh4(N):
                 if Sinv(p1+k) + Sinv(p2+k) == d:
                     stat[ b2n(k) ]+=1
     return stat, hex(stat.index(max(stat)))
+
+
+def how_many_good_pairs(klst):
+    cntr = 0
+    for i in allin:
+        j = addb(i, '0020')
+        c1 = full_round(i, klst)
+        c2 = full_round(j, klst)
+        if check_good(c1, c2):
+            cntr += 1
+    return cntr
